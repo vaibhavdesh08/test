@@ -26,7 +26,8 @@ from django.db import models
 
 class MatrimonialProfile(models.Model):
     # Section 1: Profile Pics
-    profile_pics = models.ImageField(upload_to='../profile_pics/', null=True, blank=True)
+    # profile_pics = models.ImageField(upload_to='../profile_pics/', null=True, blank=True)
+    
 
     # Section 2: Basic Details
     name = models.CharField(max_length=100)

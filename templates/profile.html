@@ -71,9 +71,10 @@
   </nav>
 <div class="profile-box" id="profileBox">
     <!-- Profile Picture -->
-    {% for pro in MatrimonialProfiles %}
-    <img src="{{ pro.profile_pics }}"  class="img-fluid" alt="Profile Picture">
-    {% endfor %}
+    <!-- <input type="file" multiple name="files" id"name" required/>
+    {%for url in new_urls%}
+    <img src="{{url}}" width="150" height="150"/>
+    {% endfor%} -->
     <!-- Profile Details -->
     <div class="profile-details">
         {% for pro in MatrimonialProfiles %}

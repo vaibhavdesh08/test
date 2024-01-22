@@ -136,6 +136,24 @@ def create_profile(request):
     return render(request, 'create_profile.html', {'form': form})
 
 
+from django.shortcuts import render,redirect
+from p_pics.models import Files
+def pro(request):
+    if request.method == 'POST':
+        files = request.FILES.getlist('files')
+        file_list = []
+
+        for file in files:
+            new_file = Files(
+                file = file
+            )
+            new_file.save()
+            file_list.append(new_file.file.url)
+
+        return render(request,{'new_urls': file_list})
+
+
+
 
 
 
