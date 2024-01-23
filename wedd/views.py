@@ -136,23 +136,41 @@ def create_profile(request):
     return render(request, 'create_profile.html', {'form': form})
 
 
-from django.shortcuts import render,redirect
-from p_pics.models import Files
-def pro(request):
+# from django.shortcuts import render,redirect
+# from p_pics.models import Files
+# def index(request):
+#     if request.method == 'POST':
+#         files = request.FILES.getlist('files')
+#         file_list = []
+
+#         for file in files:
+#             new_file = Files(
+#                 file = file
+#             )
+#             new_file.save()
+#             file_list.append(new_file.file.url)
+
+        # return render(request,{'new_urls': file_list})
+
+
+from django.shortcuts import render, redirect
+from p_pics.forms import UserImageForm
+from p_pics.models import UserProfile
+
+def add_images(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    
     if request.method == 'POST':
-        files = request.FILES.getlist('files')
-        file_list = []
-
-        for file in files:
-            new_file = Files(
-                file = file
-            )
-            new_file.save()
-            file_list.append(new_file.file.url)
-
-        return render(request,{'new_urls': file_list})
-
-
+        form = UserImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image_instance = form.save(commit=False)
+            image_instance.user_profile = user_profile
+            image_instance.save()
+            return redirect('profile')  # Change 'profile' to your actual profile view name
+    else:
+        form = UserImageForm()
+        
+    return render(request, 'add_images.html', {'form': form})
 
 
 
